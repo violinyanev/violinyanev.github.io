@@ -6,7 +6,7 @@
 name: Of Love, Death, and Robots
 
 # Short bio or description (displayed in the header)
-description: Not the site you are looking for
+description: Not the site you were looking for
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://raw.githubusercontent.com/violinyanev/violinyanev.github.io/main/images/the_dogge.png
@@ -82,5 +82,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - LICENSE
-  - README.md
   - CNAME
