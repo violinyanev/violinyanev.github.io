@@ -449,21 +449,24 @@
                         <form>
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
-                                    <input type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Name"/>
+                                    <input id="input_name" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Name"/>
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <input type="email" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Email"/>
+                                    <input id="input_email" type="email" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Email"/>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 52px;">
+                                    <input id="input_guests" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Number of guests"/>
+                                    <!--select class="form-control bg-secondary border-0" style="height: 52px;">
                                         <option>Number of Guest</option>
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
                                         <option>4</option>
-                                    </select>
+                                        <option>5</option>
+                                        <option>6</option>
+                                    </select-->
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <select class="form-control bg-secondary border-0" style="height: 52px;">
@@ -476,8 +479,18 @@
                             <div class="form-group">
                                 <textarea class="form-control bg-secondary border-0 py-2 px-3" rows="5" placeholder="Message" required="required"></textarea>
                             </div>
+                            <!-- Template Javascript -->
+                            <script>
+                                function myFunction() {
+                                    console.log("Name: " + document.getElementById("input_name").value);
+                                    console.log("Email: " + document.getElementById("input_email").value);
+
+                                    //document.getElementById("demo").style.color = "red";
+                                    //document.getElementById("demo").style.backgroundColor = "yellow";
+                                }
+                            </script>
                             <div>
-                                <button class="btn btn-primary font-weight-bold py-3 px-5" type="submit">Submit</button>
+                                <button id="demo" class="btn btn-primary font-weight-bold py-3 px-5" type="submit" onclick="myFunction()">Submit</button>
                             </div>
                         </form>
                     </div>
