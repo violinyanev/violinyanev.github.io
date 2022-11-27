@@ -458,26 +458,28 @@
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
                                     <input id="input_guests" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Number of guests"/>
-                                    <!--select class="form-control bg-secondary border-0" style="height: 52px;">
-                                        <option>Number of Guest</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                        <option>6</option>
-                                    </select-->
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <select class="form-control bg-secondary border-0" style="height: 52px;">
-                                        <option>I'm Attending</option>
-                                        <option>All Events</option>
-                                        <option>Wedding Party</option>
+                                        <option id="input_attending" >I'm Attending</option>
+                                        <option id="input_not_attending" >Can't attend</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    Food preferences:
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <select class="form-control bg-secondary border-0" style="height: 52px;">
+                                        <option id="vegetarian" >Non-vegetarian</option>
+                                        <option id="non_vegetarian" >Vegetarian</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <textarea id="input_message" class="form-control bg-secondary border-0 py-2 px-3" rows="5" placeholder="Message" required="required"></textarea>
+                                <textarea id="input_message" class="form-control bg-secondary border-0 py-2 px-3" rows="5"
+                                    placeholder="Additional info, e.g. names of other guests, please mention if they are kids" required="required"></textarea>
                             </div>
                         </form>
                         <script>
@@ -486,6 +488,35 @@
                                 var mail = document.getElementById("input_email").value
                                 var guests = document.getElementById("input_guests").value
                                 var msg = document.getElementById("input_message").value
+                                var attending = document.getElementById("input_attending").selected
+                                var notattending = document.getElementById("input_not_attending").selected
+                                var coming = "yes"
+                                if(notattending)
+                                {
+                                    coming = "no"
+                                }
+
+                                if(name.length == 0) {
+                                    alert("Must provide your name!");
+                                    return
+                                }
+
+                                if(name.mail == 0) {
+                                    alert("Must provide your email!");
+                                    return
+                                }
+
+                                if(guests.length == 0) {
+                                    alert("Must provide guests number!");
+                                    return
+                                }
+
+                                var gNr = Number(guests)
+
+                                if(gNr <= 0 || gNr >= 10) {
+                                    alert("Must provide guests number!");
+                                    return
+                                }
 
                                 var b = document.getElementById("input_submit_btn")
                                 b.innerText = "Sending..."
@@ -494,8 +525,9 @@
                                 data = {
                                     'name': name,
                                     'email': mail,
-                                    'nr_guests': guests,
+                                    'nr_guests': String(gNr),
                                     'message': msg,
+                                    'confirm': coming
                                 }
 
                                 var url="https://o9rb6es47i.execute-api.us-east-2.amazonaws.com/prod/rsvp"
@@ -517,7 +549,8 @@
                                     b.innerText = "Error :("
                                     b.disabled=false
                                 };
-                                xhr.send(JSON.stringify(data));
+                                console.log(JSON.stringify(data))
+                                //xhr.send(JSON.stringify(data));
                             }
                         </script>
                         <div>
