@@ -1,0 +1,13 @@
+TODO
+- change typeface
+- message on top of RSVP:
+    Kindly reply by 1st of May 2023
+         -> make bold and bigger
+- store data better (vegetarian/non veg, also store food remarks separately)
+- languages:
+    - Bulgarian
+    - English
+- fix photos
+
+Nice to have:
+- email for RSVP entries
