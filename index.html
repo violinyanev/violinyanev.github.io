@@ -477,22 +477,51 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control bg-secondary border-0 py-2 px-3" rows="5" placeholder="Message" required="required"></textarea>
+                                <textarea id="input_message" class="form-control bg-secondary border-0 py-2 px-3" rows="5" placeholder="Message" required="required"></textarea>
                             </div>
                             <!-- Template Javascript -->
                             <script>
-                                function myFunction() {
-                                    console.log("Name: " + document.getElementById("input_name").value);
-                                    console.log("Email: " + document.getElementById("input_email").value);
+                                function sendRSVP() {
+                                    var name = document.getElementById("input_name").value
+                                    var mail = document.getElementById("input_email").value
+                                    var guests = document.getElementById("input_guests").value
+                                    var msg = document.getElementById("input_message").value
 
-                                    //document.getElementById("demo").style.color = "red";
-                                    //document.getElementById("demo").style.backgroundColor = "yellow";
+                                    data = {
+                                        'name': name,
+                                        'email': mail,
+                                        'nr_guests': guests,
+                                        'message': msg,
+                                    }
+
+                                    var url="https://o9rb6es47i.execute-api.us-east-2.amazonaws.com/prod/rsvp"
+
+                                    var xhr = new XMLHttpRequest();
+                                    xhr.open('POST', url);
+                                    if (!xhr) {
+                                        alert("Your browser doesn't like our wedding site :( Please send us an email to violin.yanev@gmail.com");
+                                        return;
+                                    }
+                                    xhr.onload = function(event){
+                                        console.log("Success, server responded with: " + event.target.response);
+                                    };
+                                    xhr.onerror = function(event){
+                                        alert("Your browser doesn't like our wedding site :( Please send us an email to violin.yanev@gmail.com");
+                                        console.log(JSON.stringify(event));
+                                    };
+                                    xhr.send(JSON.stringify(data));
                                 }
+
                             </script>
                             <div>
-                                <button id="demo" class="btn btn-primary font-weight-bold py-3 px-5" type="submit" onclick="myFunction()">Submit</button>
+                                <button id="xxx" class="btn btn-primary font-weight-bold py-3 px-5" onclick="sendRSVP()">Submit</button>
+                                <!--button id="demo" class="btn btn-primary font-weight-bold py-3 px-5" onclick="sendRSVP()">Submit</button-->
+                                <!--button id="demo" class="btn btn-primary font-weight-bold py-3 px-5" type="submit" onclick="sendRSVP()">Submit</button-->
                             </div>
                         </form>
+                        <div>
+                            <button id="xxx" onclick="sendRSVP()">TEST</button>
+                        </div>
                     </div>
                 </div>
             </div>
