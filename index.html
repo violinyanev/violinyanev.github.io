@@ -125,6 +125,139 @@
     <!-- Video Modal End -->
 
 
+    <!-- RSVP Start -->
+    <div class="container-fluid py-5" id="rsvp">
+        <div class="container py-5">
+            <div class="section-title position-relative text-center">
+                <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6>
+                <h1 class="font-secondary display-4">Join Our Party</h1>
+                <i class="far fa-heart text-dark"></i>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="text-center">
+                        <form id="input_form">
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <input id="input_name" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Name"/>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <input id="input_email" type="email" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Email"/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <input id="input_guests" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Number of guests"/>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
+                                        <option id="input_attending" >I'm Attending</option>
+                                        <option id="input_not_attending" >Can't attend</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
+                                        <option id="vegetarian" >Non-vegetarian</option>
+                                        <option id="non_vegetarian" >Vegetarian</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <input id="input_food" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Extra food remarks"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="input_message" class="form-control bg-secondary border-0 py-2 px-3" rows="5"
+                                    placeholder="Additional info, e.g. names of other guests, please mention if they are kids" required="required"></textarea>
+                            </div>
+                        </form>
+                        <script>
+                            function sendRSVP() {
+                                var name = document.getElementById("input_name").value
+                                var mail = document.getElementById("input_email").value
+                                var food = document.getElementById("input_food").value
+                                var guests = document.getElementById("input_guests").value
+                                var msg = document.getElementById("input_message").value
+                                var attending = document.getElementById("input_attending").selected
+                                var notattending = document.getElementById("input_not_attending").selected
+                                var coming = "yes"
+                                if(notattending)
+                                {
+                                    coming = "no"
+                                }
+
+                                if(name.length == 0) {
+                                    alert("Must provide your name!");
+                                    return
+                                }
+
+                                if(name.mail == 0) {
+                                    alert("Must provide your email!");
+                                    return
+                                }
+
+                                if(guests.length == 0) {
+                                    alert("Must provide guests number!");
+                                    return
+                                }
+
+                                var gNr = Number(guests)
+
+                                if(gNr <= 0 || gNr >= 10) {
+                                    alert("Must provide guests number!");
+                                    return
+                                }
+
+                                var b = document.getElementById("input_submit_btn")
+                                b.innerText = "Sending..."
+                                b.disabled=true
+
+                                data = {
+                                    'name': name,
+                                    'email': mail,
+                                    'nr_guests': String(gNr),
+                                    'message': msg + "\; food remarks: " + food,
+                                    'confirm': coming
+                                }
+
+                                var url="https://o9rb6es47i.execute-api.us-east-2.amazonaws.com/prod/rsvp"
+
+                                var xhr = new XMLHttpRequest();
+                                xhr.open('POST', url);
+                                if (!xhr) {
+                                    alert("Your browser doesn't like our wedding site :( Please send us an email to violin.yanev@gmail.com");
+                                    return;
+                                }
+                                xhr.onload = function(event){
+                                    console.log("Success, server responded with: " + event.target.response);
+                                    b.disabled=false
+                                    b.innerText = "Thank you!"
+                                };
+                                xhr.onerror = function(event){
+                                    alert("Your browser doesn't like our wedding site :( Please send us an email to violin.yanev@gmail.com");
+                                    console.log(JSON.stringify(event));
+                                    b.innerText = "Error :("
+                                    b.disabled=false
+                                };
+                                //console.log(JSON.stringify(data))
+                                xhr.send(JSON.stringify(data));
+                            }
+                        </script>
+                        <div>
+                            <button id="input_submit_btn" class="btn btn-primary font-weight-bold py-3 px-5" onclick="sendRSVP()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- RSVP End -->
+
+
+
+
+
     <!-- About Start -->
     <div class="container-fluid py-5" id="about">
         <div class="container py-5">
@@ -170,24 +303,24 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center">
-                    <h5 class="font-weight-normal text-muted mb-3 pb-3">Clita ipsum aliquyam dolor diam dolores elitr nonumy. Rebum sea vero ipsum eirmod tempor kasd. Diam amet lorem erat eos sit lorem elitr justo</h5>
+                    <h5 class="font-weight-normal text-muted mb-3 pb-3">Our wedding will be on the 9th of June 2023 at Pasarel Lake Club near Sofia, Bulgaria.</h5>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6 border-right border-primary">
                     <div class="text-center text-md-right mr-md-3 mb-4 mb-md-0">
                         <img class="img-fluid mb-4" src="img/event-1.jpg" alt="">
-                        <h4 class="mb-3">The Reception</h4>
-                        <p class="mb-2">123 Street, New York, USA</p>
-                        <p class="mb-0">12:00AM - 13:00PM</p>
+                        <h4 class="mb-3">Welcome cocktails</h4>
+                        <p class="mb-2">Pasarel Lake Club Garden</p>
+                        <p class="mb-0">17:00 - 18:00</p>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="text-center text-md-left ml-md-3">
                         <img class="img-fluid mb-4" src="img/event-2.jpg" alt="">
                         <h4 class="mb-3">Wedding Party</h4>
-                        <p class="mb-2">123 Street, New York, USA</p>
-                        <p class="mb-0">12:00AM - 13:00PM</p>
+                        <p class="mb-2">Pasarel Lake Club</p>
+                        <p class="mb-0">18:30AM - 01:00AM</p>
                     </div>
                 </div>
             </div>
@@ -196,7 +329,7 @@
     <!-- Event End -->
 
 
-    <!-- Friends & Family Start ->
+    <!-- Friends & Family Start -->
     <div class="container-fluid py-5" id="family">
         <div class="container pt-5 pb-3">
             <div class="section-title position-relative text-center">
@@ -306,136 +439,8 @@
             </div>
         </div>
     </div>
-    <!- Friends & Family End -->
+    <!-- Friends & Family End -->
 
-
-    <!-- RSVP Start -->
-    <div class="container-fluid py-5" id="rsvp">
-        <div class="container py-5">
-            <div class="section-title position-relative text-center">
-                <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6>
-                <h1 class="font-secondary display-4">Join Our Party</h1>
-                <i class="far fa-heart text-dark"></i>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="text-center">
-                        <form id="input_form">
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <input id="input_name" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Name"/>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <input id="input_email" type="email" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Email"/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <input id="input_guests" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Number of guests"/>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 52px;">
-                                        <option id="input_attending" >I'm Attending</option>
-                                        <option id="input_not_attending" >Can't attend</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    Food preferences:
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 52px;">
-                                        <option id="vegetarian" >Non-vegetarian</option>
-                                        <option id="non_vegetarian" >Vegetarian</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <textarea id="input_message" class="form-control bg-secondary border-0 py-2 px-3" rows="5"
-                                    placeholder="Additional info, e.g. names of other guests, please mention if they are kids" required="required"></textarea>
-                            </div>
-                        </form>
-                        <script>
-                            function sendRSVP() {
-                                var name = document.getElementById("input_name").value
-                                var mail = document.getElementById("input_email").value
-                                var guests = document.getElementById("input_guests").value
-                                var msg = document.getElementById("input_message").value
-                                var attending = document.getElementById("input_attending").selected
-                                var notattending = document.getElementById("input_not_attending").selected
-                                var coming = "yes"
-                                if(notattending)
-                                {
-                                    coming = "no"
-                                }
-
-                                if(name.length == 0) {
-                                    alert("Must provide your name!");
-                                    return
-                                }
-
-                                if(name.mail == 0) {
-                                    alert("Must provide your email!");
-                                    return
-                                }
-
-                                if(guests.length == 0) {
-                                    alert("Must provide guests number!");
-                                    return
-                                }
-
-                                var gNr = Number(guests)
-
-                                if(gNr <= 0 || gNr >= 10) {
-                                    alert("Must provide guests number!");
-                                    return
-                                }
-
-                                var b = document.getElementById("input_submit_btn")
-                                b.innerText = "Sending..."
-                                b.disabled=true
-
-                                data = {
-                                    'name': name,
-                                    'email': mail,
-                                    'nr_guests': String(gNr),
-                                    'message': msg,
-                                    'confirm': coming
-                                }
-
-                                var url="https://o9rb6es47i.execute-api.us-east-2.amazonaws.com/prod/rsvp"
-
-                                var xhr = new XMLHttpRequest();
-                                xhr.open('POST', url);
-                                if (!xhr) {
-                                    alert("Your browser doesn't like our wedding site :( Please send us an email to violin.yanev@gmail.com");
-                                    return;
-                                }
-                                xhr.onload = function(event){
-                                    console.log("Success, server responded with: " + event.target.response);
-                                    b.disabled=false
-                                    b.innerText = "Thank you!"
-                                };
-                                xhr.onerror = function(event){
-                                    alert("Your browser doesn't like our wedding site :( Please send us an email to violin.yanev@gmail.com");
-                                    console.log(JSON.stringify(event));
-                                    b.innerText = "Error :("
-                                    b.disabled=false
-                                };
-                                console.log(JSON.stringify(data))
-                                //xhr.send(JSON.stringify(data));
-                            }
-                        </script>
-                        <div>
-                            <button id="input_submit_btn" class="btn btn-primary font-weight-bold py-3 px-5" onclick="sendRSVP()">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- RSVP End -->
 
 
 
@@ -558,18 +563,12 @@
                 <h1 class="font-secondary display-3 text-white">Thank You</h1>
                 <i class="far fa-heart text-white"></i>
             </div>
-            <div class="d-flex justify-content-center mb-4">
-                <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
-            </div>
             <div class="d-flex justify-content-center py-2">
-                <p class="text-white" href="#">info@example.com</p>
+                <p class="text-white" href="#">violin.yanev@gmail.com</p>
                 <span class="px-3">|</span>
-                <p class="text-white" href="#">+012 345 6789</p>
+                <p class="text-white" href="#">+49 176 831 914 21</p>
             </div>
-            <p class="m-0">&copy; <a class="text-primary" href="#">Domain Name</a>. Designed by <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
+            <p class="m-0">&copy; <a class="text-primary" href="#">TODO</a>. We totally didn't steal this template for a website!
             </p>
         </div>
     </div>
