@@ -144,12 +144,27 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
-                                    <input id="input_guests" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Number of guests"/>
-                                </div>
-                                <div class="form-group col-sm-6">
                                     <select class="form-control bg-secondary border-0" style="height: 50px;">
                                         <option id="input_attending" >I'm Attending</option>
                                         <option id="input_not_attending" >Can't attend</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <input id="input_guests" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Number of guests"/>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
+                                        <option id="input_shuttle_fwd" >Shuttle at 16:00 PM</option>
+                                        <option id="input_no_shuttle_fwd" >Will get there myself</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
+                                        <option id="input_shuttle_back_2" >Shuttle back at 02:00 AM</option>
+                                        <option id="input_shuttle_back_1" >Shuttle back at 00:00 AM</option>
+                                        <option id="input_no_shuttle_back" >Don't need a shuttle back</option>
                                     </select>
                                 </div>
                             </div>
@@ -169,11 +184,17 @@
                                     placeholder="Additional info, e.g. names of other guests, please mention if they are kids" required="required"></textarea>
                             </div>
                         </form>
+
                         <script>
                             function sendRSVP() {
                                 var name = document.getElementById("input_name").value
                                 var mail = document.getElementById("input_email").value
                                 var food = document.getElementById("input_food").value
+
+                                var input_shuttle_fwd = document.getElementById("input_shuttle_fwd").selected
+                                var input_shuttle_back_2 = document.getElementById("input_shuttle_back_2").selected
+                                var input_shuttle_back_1 = document.getElementById("input_shuttle_back_1").selected
+
                                 var guests = document.getElementById("input_guests").value
                                 var msg = document.getElementById("input_message").value
                                 var attending = document.getElementById("input_attending").selected
@@ -202,7 +223,7 @@
                                 var gNr = Number(guests)
 
                                 if(gNr <= 0 || gNr >= 10) {
-                                    alert("Must provide guests number!");
+                                    alert("Must provide guests number between 1 and 10!");
                                     return
                                 }
 
@@ -210,11 +231,32 @@
                                 b.innerText = "Sending..."
                                 b.disabled=true
 
+                                var shuttle_fwd = "no"
+                                var shuttle_back = "no"
+
+                                if(input_shuttle_fwd)
+                                {
+                                    shuttle_fwd = "yes"
+                                }
+
+                                if(input_shuttle_back_2)
+                                {
+                                    shuttle_back = "2"
+                                }
+
+                                if(input_shuttle_back_1)
+                                {
+                                    shuttle_back = "1"
+                                }
+
                                 data = {
                                     'name': name,
                                     'email': mail,
                                     'nr_guests': String(gNr),
-                                    'message': msg + "\; food remarks: " + food,
+                                    'message': msg,
+                                    'shuttle_fwd': shuttle_fwd,
+                                    'shuttle_back': shuttle_back,
+                                    'food': food,
                                     'confirm': coming
                                 }
 
@@ -265,7 +307,13 @@
                 <div class="col-md-6 p-0 text-center text-md-right">
                     <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-5">
                         <h3 class="mb-3">Location/Transport</h3>
-                        <p>TODO: describe the when and hows of the event.</p>
+                        <p>We will organize a shuttle transport to Pasarel
+                            Lake Club on the wedding day. The shuttle will start at 16:00 from the
+                            <a href="https://goo.gl/maps/xV1n3m5GbULK3Rmy9">national palace of culture</a>.
+                            On the way back, you can take the shuttle at
+                            12:00 or the shuttle at 02:00 AM. Please select the option you are interested in
+                            from the RSVP form.
+                        </p>
                     </div>
                 </div>
                 <div class="col-md-6 p-0" style="min-height: 400px;">
