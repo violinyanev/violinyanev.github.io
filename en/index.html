@@ -228,14 +228,12 @@
                                 }
                                 xhr.onload = function(event){
                                     console.log("Success, server responded with: " + event.target.response);
-                                    b.disabled=false
                                     b.innerText = "Thank you!"
                                 };
                                 xhr.onerror = function(event){
                                     alert("Your browser doesn't like our wedding site :( Please send us an email to violin.yanev@gmail.com");
                                     console.log(JSON.stringify(event));
                                     b.innerText = "Error :("
-                                    b.disabled=false
                                 };
                                 //console.log(JSON.stringify(data))
                                 xhr.send(JSON.stringify(data));
