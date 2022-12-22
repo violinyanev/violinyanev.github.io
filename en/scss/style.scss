@@ -28,7 +28,7 @@ $border-width: 2px;
 
 /********** Template CSS ************/
 .font-secondary {
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Montserrat', cursive;
 }
 
 .btn-square {
@@ -261,7 +261,7 @@ $border-width: 2px;
         margin-left: -1px;
         background: $primary;
     }
-    
+
     .timeline .row::before {
         content: "";
         position: absolute;
@@ -274,7 +274,7 @@ $border-width: 2px;
         transform: rotate(45deg);
         z-index: 1;
     }
-    
+
     .timeline .row::after {
         content: "\f004";
         font-family: "Font Awesome 5 Free";
