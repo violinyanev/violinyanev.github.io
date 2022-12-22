@@ -131,7 +131,7 @@
                         <form id="input_form">
                             <div class="row justify-content-center">
                                 <div class="col-md-6 text-center">
-                                    <h5 class="font-weight-normal text-muted mb-3 pb-3">Kindly reply by 1st of May 2023</h5>
+                                    <h5 class="font-weight-normal text-muted mb-3 pb-3">Kindly reply by 1st of February 2023</h5>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -156,15 +156,14 @@
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
                                     <select class="form-control bg-secondary border-0" style="height: 50px;">
-                                        <option id="input_shuttle_fwd" >Shuttle at 16:00 PM</option>
-                                        <option id="input_no_shuttle_fwd" >Will get there myself</option>
+                                        <option id="input_shuttle_fwd" >I'll take the shuttle bus to Pasarel Lake</option>
+                                        <option id="input_no_shuttle_fwd" >I'll get there myself</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-sm-6">
                                     <select class="form-control bg-secondary border-0" style="height: 50px;">
-                                        <option id="input_shuttle_back_2" >Shuttle back at 02:00 AM</option>
-                                        <option id="input_shuttle_back_1" >Shuttle back at 00:00 AM</option>
-                                        <option id="input_no_shuttle_back" >Don't need a shuttle back</option>
+                                        <option id="input_shuttle_back" >I'll take the shuttle bus back to Sofia</option>
+                                        <option id="input_no_shuttle_back" >I don't need a shuttle back</option>
                                     </select>
                                 </div>
                             </div>
@@ -192,8 +191,7 @@
                                 var food = document.getElementById("input_food").value
 
                                 var input_shuttle_fwd = document.getElementById("input_shuttle_fwd").selected
-                                var input_shuttle_back_2 = document.getElementById("input_shuttle_back_2").selected
-                                var input_shuttle_back_1 = document.getElementById("input_shuttle_back_1").selected
+                                var input_shuttle_back = document.getElementById("input_shuttle_back").selected
 
                                 var guests = document.getElementById("input_guests").value
                                 var msg = document.getElementById("input_message").value
@@ -239,14 +237,9 @@
                                     shuttle_fwd = "yes"
                                 }
 
-                                if(input_shuttle_back_2)
+                                if(input_shuttle_back)
                                 {
-                                    shuttle_back = "2"
-                                }
-
-                                if(input_shuttle_back_1)
-                                {
-                                    shuttle_back = "1"
+                                    shuttle_back = "yes"
                                 }
 
                                 data = {
@@ -307,12 +300,10 @@
                 <div class="col-md-6 p-0 text-center text-md-right">
                     <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-5">
                         <h3 class="mb-3">Location/Transport</h3>
-                        <p>We will organize a shuttle transport to Pasarel
-                            Lake Club on the wedding day. The shuttle will start at 16:00 from the
-                            <a href="https://goo.gl/maps/xV1n3m5GbULK3Rmy9">national palace of culture</a>.
-                            On the way back, you can take the shuttle at
-                            12:00 or the shuttle at 02:00 AM. Please select the option you are interested in
-                            from the RSVP form.
+                        <p>
+                            We will organize a shuttle bus from Sofia city centre to Pasarel Lake Club and back.
+                            If you would like to join the organized transport, please kindly inform in the RSVP form.
+                            More details about exact pick-up location and time will follow soon.
                         </p>
                     </div>
                 </div>

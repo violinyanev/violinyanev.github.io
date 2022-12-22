@@ -1,6 +1,6 @@
 TODO
 - fix photos
-- entry for bus/hotel needs
+- entry for hotel needs
 
 Nice to have:
 - email for RSVP entries
