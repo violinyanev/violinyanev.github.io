@@ -4,9 +4,6 @@ TODO
     Kindly reply by 1st of May 2023
          -> make bold and bigger
 - store data better (vegetarian/non veg, also store food remarks separately)
-- languages:
-    - Bulgarian
-    - English
 - fix photos
 
 Nice to have:
