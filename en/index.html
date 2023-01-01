@@ -249,6 +249,13 @@
                                     shuttle_back = "yes"
                                 }
 
+                                var vegetarian = "no"
+                                var vegetarian_selected = document.getElementById("vegetarian").selected
+                                if(vegetarian_selected)
+                                {
+                                    vegetarian = "yes"
+                                }
+
                                 data = {
                                     'name': name,
                                     'email': mail,
@@ -257,6 +264,7 @@
                                     'shuttle_fwd': shuttle_fwd,
                                     'shuttle_back': shuttle_back,
                                     'food': food,
+                                    'vegetarian': vegetarian,
                                     'confirm': coming
                                 }
 
