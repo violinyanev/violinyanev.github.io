@@ -38,7 +38,6 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav ml-auto py-0">
                 <a href="#home" class="nav-item nav-link active">Начало</a>
-                <a href="#rsvp" class="nav-item nav-link">Покана</a>
                 <a href="#event" class="nav-item nav-link">Сватба</a>
             </div>
             <a href="index.html" class="navbar-brand mx-5 d-none d-lg-block">
@@ -123,180 +122,6 @@
     <!-- Video Modal End -->
 
 
-    <!-- RSVP Start -->
-    <div class="container-fluid py-5" id="rsvp">
-        <div class="container py-5">
-            <div class="section-title position-relative text-center">
-                <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Покана</h6>
-                <h1 class="font-secondary display-4">С голямо удоволствие Ви каним на сватбеното ни тържество!</h1>
-                <i class="far fa-heart text-dark"></i>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="text-center">
-                        <form id="input_form">
-                            <div class="row justify-content-center">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <input id="input_name" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Име"/>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <input id="input_email" type="email" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Email Адрес"/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
-                                        <option id="input_attending" >Естествено, че идвам(е)</option>
-                                        <option id="input_not_attending" >Няма да успея/ем и зна(е)м, че ще съжалявам(е) горчиво</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <input id="input_guests" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Брой гости"/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
-                                        <option id="input_shuttle_fwd" >Ще се възползвам от автобуса до Pasarel Lake</option>
-                                        <option id="input_no_shuttle_fwd" >Няма да се възползвам от автобуса</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
-                                        <option id="input_shuttle_back" >Ще се възползвам от автобуса обратно до София</option>
-                                        <option id="input_no_shuttle_back" >Няма да се възползвам от автобуса обратно до София</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
-                                        <option id="non_vegetarian" >Ям месо</option>
-                                        <option id="vegetarian" >Не ям месо</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <input id="input_food" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Алергии към храни"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <textarea id="input_message" class="form-control bg-secondary border-0 py-2 px-3" rows="5"
-                                    placeholder="Допълнителна информация - имена на другите гости, дали ядат месо, и т.н.. Моля споменете, ако те са деца."></textarea>
-                            </div>
-                        </form>
-
-                        <script>
-                            function sendRSVP() {
-                                var name = document.getElementById("input_name").value
-                                var mail = document.getElementById("input_email").value
-                                var food = document.getElementById("input_food").value
-
-                                var input_shuttle_fwd = document.getElementById("input_shuttle_fwd").selected
-                                var input_shuttle_back = document.getElementById("input_shuttle_back").selected
-
-                                var guests = document.getElementById("input_guests").value
-                                var msg = document.getElementById("input_message").value
-                                var attending = document.getElementById("input_attending").selected
-                                var notattending = document.getElementById("input_not_attending").selected
-                                var coming = "yes"
-                                if(notattending)
-                                {
-                                    coming = "no"
-                                }
-
-                                if(name.length == 0) {
-                                    alert("Моля запишете вашето име!");
-                                    return
-                                }
-
-                                if(name.mail == 0) {
-                                    alert("Моля запишете вашата електронна поща!");
-                                    return
-                                }
-
-                                if(guests.length == 0) {
-                                    alert("Моля запишете броя на гостите!");
-                                    return
-                                }
-
-                                var gNr = Number(guests)
-
-                                if(gNr <= 0 || gNr >= 10) {
-                                    alert("Моля запишете броя на гостите, той трябва да е между 1 и 9!");
-                                    return
-                                }
-
-                                var b = document.getElementById("input_submit_btn")
-                                b.innerText = "Изпращам..."
-                                b.disabled=true
-
-                                var shuttle_fwd = "no"
-                                var shuttle_back = "no"
-
-                                if(input_shuttle_fwd)
-                                {
-                                    shuttle_fwd = "yes"
-                                }
-
-                                if(input_shuttle_back)
-                                {
-                                    shuttle_back = "yes"
-                                }
-
-                                var vegetarian = "no"
-                                var vegetarian_selected = document.getElementById("vegetarian").selected
-                                if(vegetarian_selected)
-                                {
-                                    vegetarian = "yes"
-                                }
-
-                                data = {
-                                    'name': name,
-                                    'email': mail,
-                                    'nr_guests': String(gNr),
-                                    'message': msg,
-                                    'shuttle_fwd': shuttle_fwd,
-                                    'shuttle_back': shuttle_back,
-                                    'food': food,
-                                    'vegetarian': vegetarian,
-                                    'confirm': coming
-                                }
-
-                                var url="https://o9rb6es47i.execute-api.us-east-2.amazonaws.com/prod/rsvp"
-
-                                var xhr = new XMLHttpRequest();
-                                xhr.open('POST', url);
-                                if (!xhr) {
-                                    alert("Вашият браузър не харесва нашия сайт :( Моля изпратете потвърждението су на поща violin.yanev@gmail.com");
-                                    return;
-                                }
-                                xhr.onload = function(event){
-                                    console.log("Success, server responded with: " + event.target.response);
-                                    b.innerText = "Благодарим Ви!"
-                                };
-                                xhr.onerror = function(event){
-                                    alert("Вашият браузър не харесва нашия сайт :( Моля изпратете потвърждението су на поща violin.yanev@gmail.com");
-                                    console.log(JSON.stringify(event));
-                                    b.innerText = "Има проблем :("
-                                };
-                                //console.log(JSON.stringify(data))
-                                xhr.send(JSON.stringify(data));
-                            }
-                        </script>
-                        <div>
-                            <button id="input_submit_btn" class="btn btn-primary font-weight-bold py-3 px-5" onclick="sendRSVP()">Изпрати</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- RSVP End -->
-
-
-
     <!-- Event Start -->
     <div class="container-fluid py-5" id="event">
         <div class="container py-5">
@@ -330,7 +155,7 @@
                         <h4 class="mb-3">Вечеря</h4>
                         <p class="mb-0">20:30</p>
                         <h4 class="mb-3">Парти</h4>
-                        <p class="mb-0">22:00</p>
+                        <p class="mb-0">22:30</p>
                         <h4 class="mb-3">Разрязване на тортата</h4>
                     </div>
                 </div>
@@ -351,10 +176,11 @@
             <div class="row m-0 mb-4 mb-md-0 pb-2 pb-md-0">
                 <div class="col-md-6 p-0 text-center text-md-right">
                     <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-5">
-                        <h3 style="text-align: left" class="mb-3">Автобус</h3>
+                        <h3 style="text-align: left" class="mb-3">Към Pasarel Lake Club</h3>
                         <p style="text-align: left">
-                            Автобус в посока София до Пасарел тръгва в 16:30 от пилоните на НДК. Моля бъдете точни, ще има само един автобус!
+                            Автобусите до Пасарел тръгват в 16:00 часа от <a href="https://goo.gl/maps/WZFpB8pAEnmMydXw5">пилоните на НДК</a>. Моля бъдете точни!
                         </p>
+                        <h3 style="text-align: left" class="mb-3">Обратно към София</h3>
                         <p style="text-align: left">
                             В обратната посока ще има два автобуса:
                             <ul style="text-align: left">
@@ -365,6 +191,7 @@
                         <p style="text-align: left">
                             Приоритет за ранния автобус ще имат семейства с деца и любителите на поп-фолк!
                         </p>
+
                     </div>
                 </div>
                 <div class="col-md-6 p-0" style="min-height: 400px;">

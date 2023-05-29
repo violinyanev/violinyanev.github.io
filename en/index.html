@@ -38,7 +38,6 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav ml-auto py-0">
                 <a href="#home" class="nav-item nav-link active">Home</a>
-                <a href="#rsvp" class="nav-item nav-link">RSVP</a>
                 <a href="#event" class="nav-item nav-link">Wedding</a>
                 <a href="#about" class="nav-item nav-link">Transport</a>
             </div>
@@ -124,179 +123,6 @@
     <!-- Video Modal End -->
 
 
-    <!-- RSVP Start -->
-    <div class="container-fluid py-5" id="rsvp">
-        <div class="container py-5">
-            <div class="section-title position-relative text-center">
-                <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6>
-                <h1 class="font-secondary display-4">We are thrilled to invite you to our wedding!</h1>
-                <i class="far fa-heart text-dark"></i>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="text-center">
-                        <form id="input_form">
-                            <div class="row justify-content-center">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <input id="input_name" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Name"/>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <input id="input_email" type="email" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Email"/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
-                                        <option id="input_attending" >Accept with pleasure</option>
-                                        <option id="input_not_attending" >Unable to attend and I will forever regret this</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <input id="input_guests" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Number of guests"/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
-                                        <option id="input_shuttle_fwd" >I'll take the shuttle bus to Pasarel Lake</option>
-                                        <option id="input_no_shuttle_fwd" >I'll get there myself</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
-                                        <option id="input_shuttle_back" >I'll take the shuttle bus back to Sofia</option>
-                                        <option id="input_no_shuttle_back" >I don't need a shuttle back</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 50px;">
-                                        <option id="non_vegetarian" >Non-vegetarian</option>
-                                        <option id="vegetarian" >Vegetarian</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <input id="input_food" type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Food remarks (allergies)"/>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <textarea id="input_message" class="form-control bg-secondary border-0 py-2 px-3" rows="5"
-                                    placeholder="Additional info, e.g. names of other guests, their food preference etc. Please mention if they are kids"></textarea>
-                            </div>
-                        </form>
-
-                        <script>
-                            function sendRSVP() {
-                                var name = document.getElementById("input_name").value
-                                var mail = document.getElementById("input_email").value
-                                var food = document.getElementById("input_food").value
-
-                                var input_shuttle_fwd = document.getElementById("input_shuttle_fwd").selected
-                                var input_shuttle_back = document.getElementById("input_shuttle_back").selected
-
-                                var guests = document.getElementById("input_guests").value
-                                var msg = document.getElementById("input_message").value
-                                var attending = document.getElementById("input_attending").selected
-                                var notattending = document.getElementById("input_not_attending").selected
-                                var coming = "yes"
-                                if(notattending)
-                                {
-                                    coming = "no"
-                                }
-
-                                if(name.length == 0) {
-                                    alert("Must provide your name!");
-                                    return
-                                }
-
-                                if(name.mail == 0) {
-                                    alert("Must provide your email!");
-                                    return
-                                }
-
-                                if(guests.length == 0) {
-                                    alert("Must provide guests number!");
-                                    return
-                                }
-
-                                var gNr = Number(guests)
-
-                                if(gNr <= 0 || gNr >= 10) {
-                                    alert("Must provide guests number between 1 and 10!");
-                                    return
-                                }
-
-                                var b = document.getElementById("input_submit_btn")
-                                b.innerText = "Sending..."
-                                b.disabled=true
-
-                                var shuttle_fwd = "no"
-                                var shuttle_back = "no"
-
-                                if(input_shuttle_fwd)
-                                {
-                                    shuttle_fwd = "yes"
-                                }
-
-                                if(input_shuttle_back)
-                                {
-                                    shuttle_back = "yes"
-                                }
-
-                                var vegetarian = "no"
-                                var vegetarian_selected = document.getElementById("vegetarian").selected
-                                if(vegetarian_selected)
-                                {
-                                    vegetarian = "yes"
-                                }
-
-                                data = {
-                                    'name': name,
-                                    'email': mail,
-                                    'nr_guests': String(gNr),
-                                    'message': msg,
-                                    'shuttle_fwd': shuttle_fwd,
-                                    'shuttle_back': shuttle_back,
-                                    'food': food,
-                                    'vegetarian': vegetarian,
-                                    'confirm': coming
-                                }
-
-                                var url="https://o9rb6es47i.execute-api.us-east-2.amazonaws.com/prod/rsvp"
-
-                                var xhr = new XMLHttpRequest();
-                                xhr.open('POST', url);
-                                if (!xhr) {
-                                    alert("Your browser doesn't like our wedding site :( Please send us an email to violin.yanev@gmail.com");
-                                    return;
-                                }
-                                xhr.onload = function(event){
-                                    console.log("Success, server responded with: " + event.target.response);
-                                    b.innerText = "Thank you!"
-                                };
-                                xhr.onerror = function(event){
-                                    alert("Your browser doesn't like our wedding site :( Please send us an email to violin.yanev@gmail.com");
-                                    console.log(JSON.stringify(event));
-                                    b.innerText = "Error :("
-                                };
-                                //console.log(JSON.stringify(data))
-                                xhr.send(JSON.stringify(data));
-                            }
-                        </script>
-                        <div>
-                            <button id="input_submit_btn" class="btn btn-primary font-weight-bold py-3 px-5" onclick="sendRSVP()">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- RSVP End -->
-
-
 
     <!-- Event Start -->
     <div class="container-fluid py-5" id="event">
@@ -330,7 +156,7 @@
                         <h4 class="mb-3">Dinner</h4>
                         <p class="mb-0">20:30</p>
                         <h4 class="mb-3">Party!</h4>
-                        <p class="mb-0">22:00</p>
+                        <p class="mb-0">22:30</p>
                         <h4 class="mb-3">Cake</h4>
                     </div>
                 </div>
@@ -354,25 +180,20 @@
                     <div style="text-align: left" class="h-100 d-flex flex-column justify-content-center bg-secondary p-5">
                         <h3 class="mb-3">Shuttle bus</h3>
                         <p style="text-align: left">
-                            The shuttle bus from Sofia <a href="https://goo.gl/maps/UvCtWvkFG926Ex1b6">NDK</a>. Моля бъдете точни, ще има само един автобус!
+                            The shuttle bus from Sofia will start at 16:00 from the <a href="https://goo.gl/maps/WZFpB8pAEnmMydXw5">pillars of NDK</a>. Please be on time!
                         </p>
                         <p style="text-align: left">
                             There are two shuttles back to Sofia:
                             <ul style="text-align: left">
-                            <li>at 11:30</li>
-                            <li>at 01:30</li>
+                            <li>at 11:30 PM</li>
+                            <li>at 01:30 AM</li>
                             </ul>
                         </p>
                         <p style="text-align: left">
-                            Priority for the first shuttle: families with kids, also: guests with bad taste for music.
-                        </p>
-                        <p>
-                            We will organize a shuttle bus from Sofia city centre (<a href="https://goo.gl/maps/UvCtWvkFG926Ex1b6">NDK</a>) to <a href="https://goo.gl/maps/vEZ5Jbr3rhd1tvaU8">Pasarel Lake Club</a> and back.
-                            If you would like to join the organized transport, please kindly inform in the RSVP form.
-                            More details about exact pick-up location and time will follow via e-mail.
+                            Families with kids have priority for the shuttle at 11:30 PM.
                         </p>
                         <h3 class="mb-3">Taxi</h3>
-                        <p>If you decide to come by taxi, we recommend using the <a href="https://taxime.to">TaxiME app</a> or the <a href="https://www.yellow333.com/en/">YellowTaxi app</a>.</p>
+                        <p>If you decide to travel by taxi, we recommend using the <a href="https://taxime.to">TaxiME app</a> or the <a href="https://www.yellow333.com/en/">YellowTaxi app</a>. Beware of taxi scammers!</p>
                     </div>
                 </div>
                 <div class="col-md-6 p-0" style="min-height: 400px;">
